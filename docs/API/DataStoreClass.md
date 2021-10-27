@@ -31,12 +31,6 @@ A [Datastore](ORDA/dsMapping.md#datastore) is the interface object provided by O
 
 ## ds
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v18|Support of localID parameter|
-|v17|Added|
-</details>
 
 <!-- REF #_command_.ds.Syntax -->
 **ds** { ( *localID* : Text ) } : cs.DataStore <!-- END REF -->
@@ -55,13 +49,13 @@ The `ds` command <!-- REF #_command_.ds.Summary -->returns a reference to the da
 
 If you omit the *localID* parameter (or pass an empty string ""), the command returns a reference to the datastore matching the local 4D database (or the 4D Server database in case of opening a remote database on 4D Server). The datastore is opened automatically and available directly through `ds`.
 
-You can also get a reference on an open remote datastore by passing its local id in the *localID* parameter. The datastore must have been previously opened with the [`Open datastore`](#open-datastore) command by the current database (host or component). The local id is defined when using this command.
+You can also get a reference on an open remote datastore by passing its local id in the *localID* parameter. The datastore must have been previously opened with the [`Open datastore`](#open-datastore) command. The local id is defined when using this command.
 
->The scope of the local id is the database where the datastore has been opened.
+>The scope of the local id is the project where the datastore has been opened.
 
 If no *localID* datastore is found, the command returns **Null**.
 
-Objects available in the `cs.Datastore` are mapped from the target database with respect to the [ORDA general rules](Concepts/dsMapping.md#general-rules).
+Objects available in the `cs.Datastore` are mapped from the target database with respect to the [ORDA general rules](Concepts/data-model#general-rules).
 
 #### Example 1
 
@@ -102,11 +96,6 @@ Using the main datastore on the 4D database:
 
 ## Open datastore
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v18|Added|
-</details>
 
 <!-- REF #_command_.Open datastore.Syntax -->
 **Open datastore**( *connectionInfo* : Object ; *localID* : Text ) : cs.DataStore <!-- END REF -->
@@ -127,14 +116,14 @@ The `Open datastore` command <!-- REF #_command_.Open datastore.Summary -->conne
 The *connectionInfo* 4D database must be available as a remote datastore, i.e.:
 
 *	its web server must be launched with http and/or https enabled,
-*	its [**Expose as REST server**](REST/configuration.md#starting-the-rest-server) option must be checked,
+*	its [**Expose as REST server**](https://developer.4d.com/docs/en/REST/configuration.html#starting-the-rest-server) option must be checked,
 *	at least one client license is available.
 
 If no matching database is found, `Open datastore` returns **Null**.
 
 *localID* is a local alias for the session opened on remote datastore. If *localID* already exists on the application, it is used. Otherwise, a new *localID* session is created when the datastore object is used.
 
-Objects available in the `cs.Datastore` are mapped from the target database with respect to the [ORDA general rules](Concepts/dsMapping.md#general-rules).
+Objects available in the `cs.Datastore` are mapped from the target database with respect to the [ORDA general rules](Concepts/data-model#general-rules).
 
 Once the session is opened, the following statements become equivalent and return a reference on the same datastore object:
 
@@ -210,19 +199,13 @@ In case of error, the command returns **Null**. If the remote datastore cannot b
 <!-- REF DataStoreClass.dataclassName.Desc -->
 ## *.dataclassName*
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17|Added|
-</details>
-
 <!-- REF DataStoreClass.dataclassName.Syntax -->
 ***.dataclassName*** : 4D.DataClass<!-- END REF -->
 
 
 #### Description
 
-Each dataclass in a datastore is available as a property of the [DataStore object](ORDA/dsMapping.md#datastore)data. The returned object <!-- REF DataStoreClass.dataclassName.Summary -->contains a description of the dataclass<!-- END REF -->.
+Each dataclass in a datastore is available as a property of the [DataStore object](Concepts/data-model#datastore) data. The returned object <!-- REF DataStoreClass.dataclassName.Summary -->contains a description of the dataclass<!-- END REF -->.
 
 
 #### Example
@@ -245,12 +228,6 @@ Each dataclass in a datastore is available as a property of the [DataStore objec
 <!-- REF DataStoreClass.cancelTransaction().Desc -->
 
 ## .cancelTransaction()
-
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v18|Added|
-</details>
 
 
 <!-- REF #DataStoreClass.cancelTransaction().Syntax -->
@@ -284,11 +261,6 @@ See example for the [`.startTransaction()`](#starttransaction) function.
 <!-- REF DataStoreClass.encryptionStatus().Desc -->
 ## .encryptionStatus()
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17 R5|Added|
-</details>
 
 <!-- REF #DataStoreClass.encryptionStatus().Syntax -->
 **.encryptionStatus()**: Object<!-- END REF -->
@@ -359,12 +331,6 @@ You want to know the number of encrypted tables in the current data file:
 <!-- REF DataStoreClass.getInfo().Desc -->
 ## .getInfo()   
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17|Added|
-
-</details>
 
 <!-- REF #DataStoreClass.getInfo().Syntax -->
 **.getInfo()**: Object<!-- END REF -->
@@ -430,11 +396,6 @@ On a remote datastore:
 <!-- REF DataStoreClass.getRequestLog().Desc -->
 ## .getRequestLog()
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17 R6|Added|
-</details>
 
 <!-- REF #DataStoreClass.getRequestLog().Syntax -->
 **.getRequestLog()** : Collection<!-- END REF -->
@@ -456,7 +417,7 @@ This function must be called on a remote 4D, otherwise it returns an empty colle
 
 Collection of stacked request objects. The most recent request has index 0.
 
-For a description of the ORDA request log format, please refer to the [**ORDA client requests**](https://doc.4d.com/4Dv18/4D/18/Description-of-log-files.300-4575486.en.html#4385373) section.
+For a description of the ORDA request log format, please refer to the [**ORDA client requests**](https://developer.4d.com/docs/en/Admin/debugLogFiles.html#orda-client-requests) section.
 
 
 #### Example
@@ -468,12 +429,6 @@ See Example 2 of [`.startRequestLog()`](#startrequestlog).
 
 <!-- REF DataStoreClass.isAdminProtected().Desc -->
 ## .isAdminProtected()
-
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v18 R6|Added|
-</details>
 
 <!-- REF #DataStoreClass.isAdminProtected().Syntax -->
 **.isAdminProtected()** : Boolean<!-- END REF -->
@@ -487,7 +442,7 @@ See Example 2 of [`.startRequestLog()`](#startrequestlog).
 
 #### Description
 
-The `.isAdminProtected()` function <!-- REF #DataStoreClass.isAdminProtected().Summary -->returns `True` if [Data Explorer](Admin/dataExplorer.md) access has been disabled for the working session<!-- END REF -->.
+The `.isAdminProtected()` function <!-- REF #DataStoreClass.isAdminProtected().Summary -->returns `True` if [Data Explorer](https://developer.4d.com/docs/en/Admin/dataExplorer.html#opening-the-data-explorer) access has been disabled for the working session<!-- END REF -->.
 
 By default, the Data Explorer access is granted for `webAdmin` sessions, but it can be disabled to prevent any data access from administrators (see the [`.setAdminProtection()`](#setadminprotection) function).
 
@@ -503,11 +458,6 @@ By default, the Data Explorer access is granted for `webAdmin` sessions, but it 
 <!-- REF DataStoreClass.makeSelectionsAlterable().Desc -->
 ## .makeSelectionsAlterable()
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v18 R5|Added|
-</details>
 
 <!-- REF #DataStoreClass.makeSelectionsAlterable().Syntax -->
 **.makeSelectionsAlterable()**<!-- END REF -->
@@ -521,9 +471,9 @@ By default, the Data Explorer access is granted for `webAdmin` sessions, but it 
 
 #### Description
 
-The `.makeSelectionsAlterable()` function <!-- REF #DataStoreClass.makeSelectionsAlterable().Summary -->sets all entity selections as alterable by default in the current application datastores<!-- END REF --> (including [remote datastores](ORDA/remoteDatastores.md)). It is intended to be used once, for example in the `On Startup` database method.
+The `.makeSelectionsAlterable()` function <!-- REF #DataStoreClass.makeSelectionsAlterable().Summary -->sets all entity selections as alterable by default in the current application datastores<!-- END REF --> (including `[remote datastores](ORDA/remoteDatastores.md)`). It is intended to be used once, for example in the `On Startup` database method.
 
-When this function is not called, new entity selections can be shareable, depending on the nature of their "parent", or [how they are created](ORDA/entities.md#shareable-or-non-shareable-entity-selections).
+When this function is not called, new entity selections can be shareable, depending on the nature of their "parent", or [how they are created](Concepts/data#shareable-or-alterable-entity-selections).
 
 > This function does not modify entity selections created by [`.copy()`](#copy) or `OB Copy` when the explicit `ck shared` option is used.
 
@@ -537,12 +487,6 @@ On the other hand, using this method in new projects created in 4D v18 R5 and hi
 
 <!-- REF DataStoreClass.provideDataKey().Desc -->
 ## .provideDataKey()
-
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17 R5|Added|
-</details>
 
 <!-- REF #DataStoreClass.provideDataKey().Syntax -->
 **.provideDataKey**( *curPassPhrase* : Text ) : Object <br/>**.provideDataKey**( *curDataKey* : Object ) : Object <!-- END REF -->
@@ -617,11 +561,6 @@ If no *curPassphrase* or *curDataKey* is given, `.provideDataKey()` returns **nu
 <!-- REF DataStoreClass.setAdminProtection().Desc -->
 ## .setAdminProtection()
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v18 R6|Added|
-</details>
 
 <!-- REF #DataStoreClass.setAdminProtection().Syntax -->**.setAdminProtection**( *status* : Boolean )<!-- END REF -->
 
@@ -660,11 +599,6 @@ You create a *protectDataFile* project method to call before deployments for exa
 <!-- REF DataStoreClass.startRequestLog().Desc -->
 ## .startRequestLog()
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17 R6|Added|
-</details>
 
 <!-- REF #DataStoreClass.startRequestLog().Syntax -->
 **.startRequestLog**()<br/>**.startRequestLog**( *file* : 4D.File )<br/>**.startRequestLog**( *reqNum* : Integer )<!-- END REF -->
@@ -688,13 +622,14 @@ The ORDA request log can be sent to a file or to memory, depending on the parame
 
 *	If you passed a *file* object created with the `File` command, the log data is written in this file as a collection of objects (JSON format). Each object represents a request.<br/>If the file does not already exist, it is created. Otherwise if the file already exists, the new log data is appended to it.
 If `.startRequestLog( )` is called with a file while a logging was previously started in memory, the memory log is stopped and emptied.
-	>A \] character must be manually appended at the end of the file to perform a JSON validation
+
+> A \] character must be manually appended at the end of the file to perform a JSON validation
 
 *	If you passed a *reqNum* integer, the log in memory is emptied (if any) and a new log is initialized. It will keep *reqNum* requests in memory until the number is reached, in which case the oldest entries are emptied (FIFO stack).<br/>If `.startRequestLog()` is called with a *reqNum* while a logging was previously started in a file, the file logging is stopped.
 
 *	If you did not pass any parameter, the log is started in memory. If `.startRequestLog()` was previously called with a *reqNum* (before a `.stopRequestLog()`), the log data is stacked in memory until the next time the log is emptied or `.stopRequestLog()` is called.
 
-For a description of the ORDA request log format, please refer to the [**ORDA client requests**](https://doc.4d.com/4Dv18/4D/18/Description-of-log-files.300-4575486.en.html#4385373) section.
+For a description of the ORDA request log format, please refer to the [**ORDA client requests**](https://developer.4d.com/docs/en/Admin/debugLogFiles.html#orda-client-requests) section.
 
 #### Example 1
 
@@ -739,11 +674,6 @@ You want to log ORDA client requests in memory:
 <!-- REF DataStoreClass.startTransaction().Desc -->
 ## .startTransaction()
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v18|Added|
-</details>
 
 <!-- REF #DataStoreClass.startTransaction().Syntax -->
 **.startTransaction()**<!-- END REF -->
@@ -808,12 +738,6 @@ You can nest several transactions (sub-transactions). Each transaction or sub-tr
 <!-- REF DataStoreClass.stopRequestLog().Desc -->
 ## .stopRequestLog()
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17 R6|Added|
-</details>
-
 <!-- REF #DataStoreClass.stopRequestLog().Syntax -->
 **.stopRequestLog()**  <!-- END REF -->
 
@@ -843,11 +767,6 @@ See examples for [`.startRequestLog()`](#startrequestlog).
 <!-- REF DataStoreClass.validateTransaction().Desc -->
 ## .validateTransaction()
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v18|Added|
-</details>
 
 <!-- REF #DataStoreClass.validateTransaction().Syntax -->
 **.validateTransaction()**  <!-- END REF -->

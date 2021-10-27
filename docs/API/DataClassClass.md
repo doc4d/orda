@@ -4,7 +4,7 @@ title: DataClass
 ---
 
 
-A [DataClass](ORDA/dsMapping.md#dataclass) provides an object interface to a database table. All dataclasses in a 4D application are available as a property of the `ds` [datastore](ORDA/dsMapping.md#datastore). 
+A [DataClass](Concepts/data-model#dataclass) provides an object interface to a database table. All dataclasses in a 4D application are available as a property of the `ds` [datastore](Concepts/data-model#datastore). 
 
 
 
@@ -23,14 +23,6 @@ A [DataClass](ORDA/dsMapping.md#dataclass) provides an object interface to a dat
 
 <!-- REF DataClassClass.all().Desc -->
 ## .all() 
-
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17 R5|Support of the *settings* parameter|
-|v17|Added|
-</details>
-
 
 <!-- REF #DataClassClass.all().Syntax -->
 **.all** ( { *settings* : Object } ) : 4D.EntitySelection<!-- END REF -->
@@ -59,7 +51,7 @@ In the optional *settings* parameter, you can pass an object containing addition
 
 |Property|	Type|	Description|
 |---|---|---|
-|context|Text|Label for the optimization context applied to the entity selection. This context will be used by the code that handles the entity selection so that it can benefit from the optimization. This feature is [designed for ORDA client/server processing](ORDA/entities.md#client-server-optimization).|
+|context|Text|Label for the optimization context applied to the entity selection. This context will be used by the code that handles the entity selection so that it can benefit from the optimization. This feature is `[designed for ORDA client/server processing](ORDA/entities.md#client-server-optimization)`.|
 
 
 #### Example 
@@ -77,12 +69,6 @@ In the optional *settings* parameter, you can pass an object containing addition
 <!-- REF DataClassClass.fromCollection().Desc -->
 ## .fromCollection() 
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17 R5|Support of the *settings* parameter|
-|v17|Added|
-</details>
 
 <!-- REF #DataClassClass.fromCollection().Syntax -->
 **.fromCollection**( *objectCol* : Collection { ; *settings* : Object } ) : 4D.EntitySelection<!-- END REF -->
@@ -130,7 +116,7 @@ The nested objects featuring related entities must contain a "\_\_KEY" property 
 
 **Stamp**
 
-If a \_\_STAMP attribute is given, a check is performed with the stamp in the datastore and an error can be returned ("Given stamp does not match current one for record# XX of table XXXX"). For more information, see [Entity locking](ORDA/entities.md#entity-locking).
+If a \_\_STAMP attribute is given, a check is performed with the stamp in the datastore and an error can be returned ("Given stamp does not match current one for record# XX of table XXXX"). For more information, see [Entity locking](Concepts/data#entity-locking).
 
 **settings**  
 
@@ -138,7 +124,7 @@ In the optional *settings* parameter, you can pass an object containing addition
 
 |Property	|Type|	Description|
 |---|---|---|
-|context|Text|Label for the optimization context applied to the entity selection. This context will be used by the code that handles the entity selection so that it can benefit from the optimization. This feature is [designed for ORDA client/server processing](ORDA/entities.md#client-server-optimization).|
+|context|Text|Label for the optimization context applied to the entity selection. This context will be used by the code that handles the entity selection so that it can benefit from the optimization. This feature is `[designed for ORDA client/server processing](ORDA/entities.md#client-server-optimization)`.|
 
 
 #### Example 1
@@ -278,13 +264,6 @@ In this example, the first entity will be created and saved but the second will 
 <!-- REF DataClassClass.get().Desc -->
 ## .get()   
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17|Added|
-
-</details>
-
 <!-- REF #DataClassClass.get().Syntax -->
 **.get**( *primaryKey* : Integer { ; *settings* : Object } ) : 4D.Entity<br/>**.get**( *primaryKey* : Text { ; *settings* : Object } ) : 4D.Entity<!-- END REF -->
 
@@ -313,7 +292,7 @@ In the optional *settings* parameter, you can pass an object containing addition
 
 |Property|	Type|	Description|
 |---|---|---|
-|context|	Text|	Label for the automatic optimization context applied to the entity. This context will be used by the subsequent code that loads the entity so that it can benefit from the optimization. This feature is [designed for ORDA client/server processing](ORDA/entities.md#client-server-optimization).|
+|context|	Text|	Label for the automatic optimization context applied to the entity. This context will be used by the subsequent code that loads the entity so that it can benefit from the optimization. This feature is `[designed for ORDA client/server processing](ORDA/entities.md#client-server-optimization)`.|
 
 
 
@@ -357,11 +336,6 @@ This example illustrates the use of the *context* property:
 <!-- REF DataClassClass.getDataStore().Desc -->
 ## .getDataStore()
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17 R5|Added|
-</details>
 
 <!-- REF #DataClassClass.getDataStore().Syntax -->
 **.getDataStore()** : cs.DataStore<!-- END REF -->
@@ -385,7 +359,7 @@ The datastore can be:
 
 #### Example
 
-The ***SearchDuplicate*** project method searches for duplicated values in any dataclass.
+The `SearchDuplicate` project method searches for duplicated values in any dataclass.
 
 ```4d
  var $pet : cs.CatsEntity
@@ -411,11 +385,6 @@ The ***SearchDuplicate*** project method searches for duplicated values in any d
 <!-- REF DataClassClass.getInfo().Desc -->
 ## .getInfo()
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17 R5|Added|
-</details>
 
 <!-- REF #DataClassClass.getInfo().Syntax -->
 **.getInfo()** : Object <!-- END REF -->
@@ -484,12 +453,6 @@ The `.getInfo( )` function <!-- REF #DataClassClass.getInfo().Summary -->returns
 <!-- REF DataClassClass.new().Desc -->
 ## .new()
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17|Added|
-</details>
-
 <!-- REF #DataClassClass.new().Syntax -->
 **.new()** : 4D.Entity <!-- END REF -->
 
@@ -510,7 +473,6 @@ The entity object is created in memory and is not saved in the database until th
 
 All attributes of the entity are initialized with the **null** value.
 
-> Attributes can be initialized with default values if the **Map NULL values to blank values** option is selected at the 4D database structure level. 
 
 #### Example
 
@@ -531,11 +493,6 @@ This example creates a new entity in the "Log" Dataclass and records information
 <!-- REF DataClassClass.newSelection().Desc -->
 ## .newSelection()
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17|Added|
-</details>
 
 <!-- REF #DataClassClass.newSelection().Syntax -->
 **.newSelection**( { *keepOrder* : Integer } ) : 4D.EntitySelection <!-- END REF -->
@@ -552,10 +509,7 @@ This example creates a new entity in the "Log" Dataclass and records information
 
 The `.newSelection( )` function <!-- REF #DataClassClass.newSelection().Summary -->creates a new, blank, non-shareable entity selection, related to the dataclass, in memory<!-- END REF -->. 
 
-> For information on non-shareable entity selections, please refer to [this section](ORDA/entities.md#shareable-or-non-shareable-entity-selections).
-
-
-If you want to create an ordered entity selection, pass the `dk keep ordered` selector in the *keepOrder* parameter. By default if you omit this parameter, or if you pass the `dk non ordered` selector, the method creates an unordered entity selection. Unordered entity selections are faster but you cannot rely on entity positions. For more information, please see [Ordered vs Unordered entity selections](ORDA/dsMapping.md#ordered-or-unordered-entity-selection).
+If you want to create an ordered entity selection, pass the `dk keep ordered` selector in the *keepOrder* parameter. By default if you omit this parameter, or if you pass the `dk non ordered` selector, the method creates an unordered entity selection. Unordered entity selections are faster but you cannot rely on entity positions. For more information, please see [Ordered vs Unordered entity selections](Concepts/data-model#ordered-or-unordered-entity-selection).
 
 When created, the entity selection does not contain any entities (`mySelection.length` returns 0). This method lets you build entity selections gradually by making subsequent calls to the [`add()`](EntitySelectionClass.md#add) function.
 
@@ -576,14 +530,6 @@ When created, the entity selection does not contain any entities (`mySelection.l
 
 <!-- REF DataClassClass.query().Desc -->
 ## .query()
-
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17 R6|Support of Formula parameters|
-|v17 R5|Support of placeholders for values|
-|v17|Added|
-</details>
 
 <!-- REF #DataClassClass.query().Syntax -->
 **.query**( *queryString* : Text { ; *...value* : any } { ; *querySettings* : Object } ) : 4D.EntitySelection <br/>**.query**( *formula* : Object { ; *querySettings* : Object } ) : 4D.EntitySelection <!-- END REF -->
@@ -609,7 +555,7 @@ If no matching entities are found, an empty `EntitySelection` is returned.
  
 The *queryString* parameter uses the following syntax:
 
-```4d
+```
 attributePath|formula comparator value   
 	{logicalOperator attributePath|formula comparator value}   
 	{order by attributePath {desc | asc}}
@@ -666,13 +612,13 @@ where:
 	|OR | &#124;,&#124;&#124;, or|
 
 *	**order by attributePath**: you can include an order by *attributePath* statement in the query so that the resulting data will be sorted according to that statement. You can use multiple order by statements, separated by commas (e.g., order by *attributePath1* desc, *attributePath2* asc). By default, the order is ascending. Pass 'desc' to define a descending order and 'asc' to define an ascending order.
-	>*If you use this statement, the returned entity selection is ordered (for more information, please refer to [Ordered vs Unordered entity selections](ORDA/dsMapping.md#ordered-or-unordered-entity-selection)). 
+	> If you use this statement, the returned entity selection is ordered (for more information, please refer to [Ordered vs Unordered entity selections](Concepts/data-model#ordered-or-unordered-entity-selection). 
 
 **Using quotes**
 
 When you use quotes within queries, you must use single quotes ' ' inside the query and double quotes " " to enclose the whole query, otherwise an error is returned. For example:
 
-```4d
+```
 "employee.name = 'smith' AND employee.firstname = 'john'"
 ```
 
@@ -682,7 +628,7 @@ When you use quotes within queries, you must use single quotes ' ' inside the qu
 
 You can use parentheses in the query to give priority to the calculation. For example, you can organize a query as follows:
 
-```4d
+```
 "(employee.age >= 30 OR employee.age <= 65) AND (employee.salary <= 10000 OR employee.status = 'Manager')"
 ```
 
@@ -856,7 +802,7 @@ For example, if you execute the following query:
 
 queryPlan:
 
-```4d
+```
 {Or:[{And:[{item:[index : Employee.salary ] < 50000},  
 	{item:Join on Table : Company  :  Employee.employerID = Company.ID,  
 	subquery:[{item:[index : Company.name ] = Lima West Kilo}]}]},  
@@ -866,7 +812,7 @@ queryPlan:
 
 queryPath:
 
-```4d
+```
 {steps:[{description:OR,time:63,recordsfounds:1388132,  
 	steps:[{description:AND,time:32,recordsfounds:131,  
 	steps:[{description:[index : Employee.salary ] < 50000,time:16,recordsfounds:728260},{description:Join on Table : Company  :  Employee.employerID = Company.ID,time:0,recordsfounds:131,  

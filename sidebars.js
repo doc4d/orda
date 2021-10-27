@@ -12,6 +12,9 @@ module.exports = {
         'Concepts/glossary',
       ],
     },
+	],
+  
+  api: [
 
     {
       type: 'category',
@@ -19,7 +22,8 @@ module.exports = {
       items: [
             'API/DataStoreClass',
             'API/DataClassClass',
-            'API/EntitySelectionClass',
+            'API/DataClassAttributeClass',
+           'API/EntitySelectionClass',
             'API/EntityClass',
            ],
         },
