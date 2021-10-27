@@ -1,0 +1,97 @@
+/* stylelint-disable docusaurus/copyright-header */
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here.   --ifm-color-primary: #25c2a0;*/
+
+:root {
+  --ifm-color-primary: #5794d4;
+  --ifm-color-primary-dark: rgb(33, 175, 144);
+  --ifm-color-primary-darker: rgb(31, 165, 136);
+  --ifm-color-primary-darkest: rgb(26, 136, 112);
+  --ifm-color-primary-light: rgb(70, 203, 174);
+  --ifm-color-primary-lighter: rgb(102, 212, 189);
+  --ifm-color-primary-lightest: rgb(146, 224, 208);
+  --ifm-code-font-size: 95%;
+}
+
+.docusaurus-highlight-code-line {
+  background-color: rgb(72, 77, 91);
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+}
+
+.button--primary:hover {
+  background-color: #267BE3;
+}
+
+.center-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.wrap-template-formatter {
+  text-align:center; 
+  margin-top: 20px;
+  margin-bottom: 20px; 
+  height: 250px;
+  width: 100%;
+}
+
+.wrap-template-formatter p {
+  font-size: 20px;
+}
+
+.wrap-template-formatter img {
+  vertical-align: middle;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+/* custom interface numbers */
+ol.interface-numbers {
+  counter-reset: orderedlist;
+    margin: 20px 10px;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-gap: .5rem;
+  }
+  
+  li.interface-item {
+      display: grid;
+      grid-template-columns: 0 1fr;
+      grid-gap: 1.5em;
+      align-items: start;
+      line-height: 1;
+  }
+  
+  ol.interface-numbers li::before {
+  counter-increment: orderedlist;
+  content: counter(orderedlist);
+  width:1rem;
+  text-align: center;
+  color: #fff;
+  background-color:#E02626;
+  padding: 1px;
+  border-radius: 0.50em;
+  }
+
+.get-started {
+  background-color: rgb(235, 231, 255);
+  border: none;
+  color: #000;
+  transition: all 0.5s;
+  }
+  
+.get-started:hover{
+    background-color: rgb(213, 205, 255);
+    color:#000
+  }
+    
