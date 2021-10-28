@@ -203,6 +203,7 @@ For example, to create an entity:
 ```4d
  var $status : Object
  var $employee : cs.EmployeeEntity //declares a variable of the EmployeeEntity class type
+
  
 
  $employee:=ds.Employee.new()
