@@ -74,7 +74,7 @@ export default function Home() {
                 styles.getStarted
               )}
               to={useBaseUrl(
-                "docs/overview"
+                "docs/Concepts/overview"
               )}
             >
               Get Started
