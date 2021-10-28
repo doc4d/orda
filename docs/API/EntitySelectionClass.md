@@ -61,17 +61,17 @@ Entity selections can be created from existing selections using various function
 
 #### Description
 
-The `Create entity selection` command builds and returns a new, [alterable](ORDA/entities.md#shareable-or-alterable-entity-selections) entity selection related to the dataclass matching the given *dsTable*, according to the current selection of this table.
+The `Create entity selection` command builds and returns a new, [alterable](../Concepts/data#shareable-or-alterable-entity-selections) entity selection related to the dataclass matching the given *dsTable*, according to the current selection of this table.
 
-If the current selection is sorted, an [ordered](ORDA/dsMapping.md#ordered-or-unordered-entity-selection) entity selection is created (the order of the current selection is kept). If the current selection is unsorted, an unordered entity selection is created. 
+If the current selection is sorted, an [ordered](../Concepts/data-model#ordered-or-unordered-entity-selection) entity selection is created (the order of the current selection is kept). If the current selection is unsorted, an unordered entity selection is created. 
 
-If the *dsTable* is not exposed in [`ds`](API/DataStoreClass.md#ds), an error is returned. This command cannot be used with a Remote datastore.
+If the *dsTable* is not exposed in [`ds`](DataStoreClass.md#ds), an error is returned. This command cannot be used with a Remote datastore.
 
 In the optional *settings* parameter, you can pass an object containing the following property:
 
 |Property|Type|Description|
 |---|---|---|	
-|context|Text|Label for the [optimization context](ORDA/entities.md#clientserver-optimization) applied to the entity selection.|
+|context|Text|Label for the `[optimization context](ORDA/entities.md#clientserver-optimization)` applied to the entity selection.|
 
 
 #### Example
