@@ -3,7 +3,7 @@ id: EntityClass
 title: Entity
 ---
 
-An [entity](ORDA/dsMapping.md#entity) is an instance of a [Dataclass](ORDA/dsMapping.md#dataclass), like a record of the table matching the dataclass in its associated datastore. It contains the same attributes as the dataclass as well as the data values and specific properties and functions.
+An [entity](../Concepts/data-model#entity) is an instance of a [Dataclass](../Concepts/data-model#dataclass), like a record of the table matching the dataclass in its associated datastore. It contains the same attributes as the dataclass as well as the data values and specific properties and functions.
 
 
 ### Summary
@@ -41,11 +41,6 @@ An [entity](ORDA/dsMapping.md#entity) is an instance of a [Dataclass](ORDA/dsMap
 <!-- REF EntityClass.attributeName.Desc -->
 ## .*attributeName*
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17|Added|
-</details>
 
 <!-- REF EntityClass.attributeName.Syntax -->
 ***.attributeName*** : any<!-- END REF -->
@@ -55,7 +50,11 @@ An [entity](ORDA/dsMapping.md#entity) is an instance of a [Dataclass](ORDA/dsMap
 
 Any dataclass attribute is available as a property of an entity, which <!-- REF EntityClass.attributeName.Summary -->stores the attribute value for the entity<!-- END REF -->.
 
->Dataclass attributes can also be reached using the alternate syntax with \[ ].
+:::note
+
+Dataclass attributes can also be reached using the alternate syntax with \[ ].
+
+:::
 
 The attribute value type depends on the attribute [kind](DataClassAttributeClass.md#kind) (relation or storage):
 
@@ -65,7 +64,8 @@ The attribute value type depends on the attribute [kind](DataClassAttributeClass
 `.attributeName` returns the related entity. Values of the related entity are directly available through cascading properties, for example "myEntity.employer.employees\[0].lastname".
 *	If *attributeName* kind is **relatedEntities**:
 `.attributeName` returns a new entity selection of related entities. Duplications are removed (an unordered entity selection is returned).
-
+*	If *attributeName* kind is **calculated**:
+`.attributeName` can return any of value, depending on the `get` function declaration.
 
 #### Example
 
@@ -84,12 +84,6 @@ The attribute value type depends on the attribute [kind](DataClassAttributeClass
 
 <!-- REF EntityClass.clone().Desc -->
 ## .clone() 
-
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17|Added|
-</details>
 
 
 <!-- REF #EntityClass.clone().Syntax -->
@@ -131,11 +125,6 @@ This function can only be used with entities already saved in the database. It c
 <!-- REF EntityClass.diff().Desc -->
 ## .diff() 
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17|Added|
-</details>
 
 <!-- REF #EntityClass.diff().Syntax -->
 **.diff**( *entityToCompare* : 4D.Entity { ; *attributesToCompare* : Collection } ) : Collection<!-- END REF -->
@@ -335,13 +324,6 @@ vCompareResult3 (only differences on $e1 touched attributes are returned)
 <!-- REF EntityClass.drop().Desc -->
 ## .drop()   
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17|Added|
-
-</details>
-
 <!-- REF #EntityClass.drop().Syntax -->
 **.drop**( {*mode* : Integer} ) : Object<!-- END REF -->
 
@@ -443,12 +425,6 @@ Example with `dk force drop if stamp changed` option:
 <!-- REF EntityClass.first().Desc -->
 ## .first()   
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17|Added|
-
-</details>
 
 <!-- REF #EntityClass.first().Syntax -->
 **.first()**: 4D.Entity<!-- END REF -->
@@ -482,13 +458,6 @@ If the entity does not belong to any existing entity selection (i.e. [.getSelect
 <!-- REF EntityClass.fromObject().Desc -->
 ## .fromObject()   
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17|Added|
-
-</details>
-
 <!-- REF #EntityClass.fromObject().Syntax -->
 **.fromObject**( *filler* : Object )<!-- END REF -->
 
@@ -507,7 +476,7 @@ The `.fromObject()` function <!-- REF #EntityClass.fromObject().Summary -->fills
 The mapping between the object and the entity is done on the attribute names:
 
 *	If a property of the object does not exist in the dataclass, it is ignored.
-*	Data types must be equivalent. If there is a type mismatch between the object and dataclass, 4D tries to convert the data whenever possible (see [`Converting data types`](Concepts/data-types.md#converting-data-types)), otherwise the attribute is left untouched.
+*	Data types must be equivalent. If there is a type mismatch between the object and dataclass, ORDA tries to convert the data whenever possible, otherwise the attribute is left untouched.
 *	The primary key can be given as is or with a "__KEY" property (filled with the primary key value). If it does not already exist in the dataclass, the entity is created with the given value when [.save()](#save) is called. If the primary key is not given, the entity is created and the primary key value is assigned with respect to database rules. The auto-increment is only computed if the primary key is null. 
 
 *filler* can handle a related entity under the following conditions:
@@ -539,6 +508,7 @@ The following code will create an entity with manager and employer related entit
 ```4d
  var $o : Object
  var $entity : cs.EmpEntity
+
  $entity:=ds.Emp.new()
  $entity.fromObject($o)
  $entity.save()
@@ -573,12 +543,6 @@ You could also use a related entity given as an object:
 <!-- REF EntityClass.getDataClass().Desc -->
 ## .getDataClass()   
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17 R5|Added|
-
-</details>
 
 <!-- REF #EntityClass.getDataClass().Syntax -->
 **.getDataClass()** : 4D.DataClass<!-- END REF -->
@@ -620,12 +584,6 @@ The following generic code duplicates any entity:
 <!-- REF EntityClass.getKey().Desc -->
 ## .getKey()   
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17|Added|
-
-</details>
 
 <!-- REF #EntityClass.getKey().Syntax -->
 **.getKey**( { *mode* : Integer } ) : Text<br/>**.getKey**( { *mode* : Integer } ) : Integer<!-- END REF -->
@@ -664,13 +622,6 @@ Primary keys can be numbers (Integer) or strings. You can "force" the returned p
 <!-- REF EntityClass.getSelection().Desc -->
 ## .getSelection()   
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17|Added|
-
-</details>
-
 <!-- REF #EntityClass.getSelection().Syntax -->
 **.getSelection()**: 4D.EntitySelection<!-- END REF -->
 
@@ -708,12 +659,6 @@ If the entity does not belong to an entity selection, the function returns Null.
 <!-- REF EntityClass.getStamp().Desc -->
 ## .getStamp()   
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17|Added|
-
-</details>
 
 <!-- REF #EntityClass.getStamp().Syntax -->
 **.getStamp()** : Integer<!-- END REF -->
@@ -728,10 +673,13 @@ If the entity does not belong to an entity selection, the function returns Null.
 
 The `.getStamp()` function <!-- REF #EntityClass.getStamp().Summary --> returns the current value of the stamp of the entity<!-- END REF -->. 
 
-The internal stamp is automatically incremented by 4D each time the entity is saved. It manages concurrent user access and modifications to the same entities (see [**Entity locking**](ORDA/entities.md#entity-locking)).
+The internal stamp is automatically incremented by the database each time the entity is saved. It manages concurrent user access and modifications to the same entities (see [**Entity locking**](../Concepts/data#entity-locking)).
 
->For a new entity (never saved), the function returns 0. To know if an entity has just been created, it is recommended to use [.isNew()](#isnew).
+:::note
 
+For a new entity (never saved), the function returns 0. To know if an entity has just been created, it is recommended to use [.isNew()](#isnew).
+
+:::
 
 #### Example   
 
@@ -758,12 +706,6 @@ The internal stamp is automatically incremented by 4D each time the entity is sa
 <!-- REF EntityClass.indexOf().Desc -->
 ## .indexOf()   
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17|Added|
-
-</details>
 
 <!-- REF #EntityClass.indexOf().Syntax -->
 **.indexOf**( { *entitySelection* : 4D.EntitySelection } ) : Integer<!-- END REF -->
@@ -808,12 +750,6 @@ The resulting value is included between 0 and the length of the entity selection
 <!-- REF EntityClass.isNew().Desc -->
 ## .isNew()   
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17|Added|
-
-</details>
 
 <!-- REF #EntityClass.isNew().Syntax -->
 **.isNew()** : Boolean<!-- END REF -->
@@ -849,13 +785,6 @@ The `.isNew()` function <!-- REF #EntityClass.isNew().Summary --> returns True i
 <!-- REF EntityClass.last().Desc -->
 ## .last()   
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17|Added|
-
-</details>
-
 <!-- REF #EntityClass.last().Syntax -->
 **.last()** : 4D.Entity<!-- END REF -->
 
@@ -890,12 +819,6 @@ If the entity does not belong to any existing entity selection (i.e. [.getSelect
 <!-- REF EntityClass.lock().Desc -->
 ## .lock()   
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17|Added|
-
-</details>
 
 <!-- REF #EntityClass.lock().Syntax -->
 **.lock**( { *mode* : Integer } ) : Object<!-- END REF -->
@@ -909,7 +832,7 @@ If the entity does not belong to any existing entity selection (i.e. [.getSelect
 
 #### Description
 
-The `.lock()` function <!-- REF #EntityClass.lock().Summary -->puts a pessimistic lock on the record referenced by the entity<!-- END REF -->. The [lock is set](ORDA/entities.md#entity-locking) for a record and all the references of the entity in the current process.
+The `.lock()` function <!-- REF #EntityClass.lock().Summary -->puts a pessimistic lock on the record referenced by the entity<!-- END REF -->. The [lock is set](../Concepts/data#entity-locking) for a record and all the references of the entity in the current process.
 
 Other processes will see this record as locked (the `result.success` property will contain False if they try to lock the same entity using this function). Only functions executed in the "locking" session are allowed to edit and save the attributes of the entity. The entity can be loaded as read-only by other sessions, but they will not be able to enter and save values.
 
@@ -1003,13 +926,6 @@ Example with `dk reload if stamp changed` option:
 <!-- REF EntityClass.next().Desc -->
 ## .next()   
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17|Added|
-
-</details>
-
 <!-- REF #EntityClass.next().Syntax -->
 **.next()** : 4D.Entity<!-- END REF -->
 
@@ -1044,13 +960,6 @@ If there is no valid next entity in the entity selection (i.e. you are on the la
 
 <!-- REF EntityClass.previous().Desc -->
 ## .previous()   
-
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17|Added|
-
-</details>
 
 <!-- REF #EntityClass.previous().Syntax -->
 **.previous()**  : 4D.Entity<!-- END REF -->
@@ -1087,13 +996,6 @@ If there is no valid previous entity in the entity selection (i.e. you are on th
 <!-- REF EntityClass.reload().Desc -->
 ## .reload( )   
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17|Added|
-
-</details>
-
 <!-- REF #EntityClass.reload().Syntax -->
 **.reload()** : Object<!-- END REF -->
 
@@ -1113,7 +1015,8 @@ The object returned by `.reload( )` contains the following properties:
 
 |Property	|Type|	Description|
 |---|---|---|
-|success|boolean|	True if the reload action is successful, False otherwise.<p>***Available only in case of error***</p>:|
+|success|boolean|	True if the reload action is successful, False otherwise.|
+|||***Available only in case of error:***|
 |status(\*)|number|Error code, see below|
 |statusText(\*)|text|Description of the error, see below|
 
@@ -1150,13 +1053,6 @@ The object returned by `.reload( )` contains the following properties:
 <!-- REF EntityClass.save().Desc -->
 ## .save()   
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17|Added|
-
-</details>
-
 <!-- REF #EntityClass.save().Syntax -->
 **.save**( { *mode* : Integer } ) : Object<!-- END REF -->
 
@@ -1173,7 +1069,7 @@ The `.save()` function <!-- REF #EntityClass.save().Summary -->saves the changes
 
 The save operation is executed only if at least one entity attribute has been "touched" (see the [`.touched()`](#touched) and [`.touchedAttributes()`](#touchedattributes) functions). Otherwise, the function does nothing (the trigger is not called).
 
-In a multi-user or multi-process application, the `.save()` function is executed under an ["optimistic lock"](ORDA/entities.md#entity-locking) mechanism, wherein an internal locking stamp is automatically incremented each time the record is saved. 
+In a multi-user or multi-process application, the `.save()` function is executed under an ["optimistic lock"](../Concepts/data#entity-locking) mechanism, wherein an internal locking stamp is automatically incremented each time the record is saved. 
 
 By default, if the *mode* parameter is omitted, the method will return an error (see below) whenever the same entity has been modified by another process or user in the meantime, no matter the modified attribute(s).
 
@@ -1286,12 +1182,6 @@ Updating an entity with `dk auto merge` option:
 <!-- REF EntityClass.toObject().Desc -->
 ## .toObject()   
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17|Added|
-
-</details>
 
 <!-- REF #EntityClass.toObject().Syntax -->
 **.toObject**() : Object<br/>**.toObject**( *filterString* : Text { ; *options* : Integer}  ) : Object<br/>**.toObject**( *filterCol* : Collection { ; *options* : Integer } ) : Object<!-- END REF -->
@@ -1573,13 +1463,6 @@ Returns:
 <!-- REF EntityClass.touched().Desc -->
 ## .touched( )   
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17|Added|
-
-</details>
-
 <!-- REF #EntityClass.touched().Syntax -->
 **.touched()** : Boolean<!-- END REF -->
 
@@ -1616,13 +1499,6 @@ In this example, we check to see if it is necessary to save the entity:
 
 <!-- REF EntityClass.touchedAttributes().Desc -->
 ## .touchedAttributes( )   
-
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17|Added|
-
-</details>
 
 <!-- REF #EntityClass.touchedAttributes().Syntax -->
 **.touchedAttributes()** : Collection<!-- END REF -->
@@ -1693,13 +1569,6 @@ In this case:
 <!-- REF EntityClass.unlock().Desc -->
 ## .unlock()   
 
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v17|Added|
-
-</details>
-
 <!-- REF #EntityClass.unlock().Syntax -->
 **.unlock()** : Object<!-- END REF -->
 
@@ -1713,7 +1582,7 @@ In this case:
 
 The `.unlock()` function <!-- REF #EntityClass.unlock().Summary -->removes the pessimistic lock on the record matching the entity<!-- END REF --> in the datastore and table related to its dataclass.
 
-> For more information, please refer to [Entity locking](ORDA/entities.md#entity-locking) section.
+> For more information, please refer to [Entity locking](../Concepts/data#entity-locking) section.
 
 A record is automatically unlocked when it is no longer referenced by any entities in the locking process (for example: if the lock is put only on one local reference of an entity, the entity and thus the record is unlocked when the process ends).
 

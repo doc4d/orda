@@ -20,12 +20,12 @@ module.exports = {
       type: 'category',
       label: 'API',
       items: [
-            'API/DataStoreClass',
-            'API/DataClassClass',
-            'API/DataClassAttributeClass',
+             'API/DataClassAttributeClass',
+             'API/DataClassClass',
+          'API/DataStoreClass',
+             'API/EntityClass',
            'API/EntitySelectionClass',
-            'API/EntityClass',
-           ],
+          ],
         },
   ],
 };
