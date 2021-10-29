@@ -199,7 +199,7 @@ This property is not returned if [`.kind`](#kind) = "relatedEntity" or "relatedE
 The `.kind` property <!-- REF DataClassAttributeClass.kind.Summary -->returns the category of the attribute<!-- END REF -->. Returned value can be one of the following:
 
 *	"storage": storage (or scalar) attribute, i.e. attribute storing a value, not a reference to another attribute
-*	"calculated": computed attribute, i.e. defined through a [`get` function](ORDA/ordaClasses.md#function-get-attributename).
+*	"calculated": computed attribute, i.e. defined through a [`get` function](../Concepts/orda-classes#function-get-attributename).
 *	"relatedEntity": N -> 1 relation attribute (reference to an entity)
 *	"relatedEntities": 1 -> N relation attribute (reference to an entity selection)
 
@@ -338,7 +338,7 @@ The conceptual value type depends on the attribute [`.kind`](#kind).
 
 |dataClassAttribute.kind|	type|	Comment|
 |---|---|---|
-|storage|"blob", "bool", "date", "image", "number", "object", or "string"| "number" is returned for any numeric types including duration. "string" is returned for uuid, alpha and text field types. "blob" attributes are [blob objects](Concepts/dt_blob.md#blob-type), they are handled using the [Blob class](BlobClass.md).|
+|storage|"blob", "bool", "date", "image", "number", "object", or "string"| "number" is returned for any numeric types including duration. "string" is returned for uuid, alpha and text field types. "blob" attributes are [blob objects](https://developer.4d.com/docs/en/Concepts/blob.html#blob-types), they are handled using the [Blob class](https://developer.4d.com/docs/en/API/BlobClass.html).|
 |relatedEntity|related dataClass name|Ex: "Companies"|
 |relatedEntities|related dataClass name + "Selection" suffix|	Ex: "EmployeeSelection"|
 |calculated|<li>storage: type ("blob", "number", etc.)</li><li>entity: dataClass name</li><li>entity selection: dataClass name + "Selection"</li>||
