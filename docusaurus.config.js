@@ -1,7 +1,7 @@
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
   title: "ORDA - Object Relational Data Access",
-  tagline: "An object-oriented technology for simple and powerful data access",
+  tagline: "A powerful technology for business-oriented data access",
   url: "https://doc4d.github.io",
   baseUrl: "/orda/",
   onBrokenLinks: "warn",
