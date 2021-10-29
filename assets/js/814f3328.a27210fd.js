@@ -1,1 +1,0 @@
-(self.webpackChunkgo_mobile=self.webpackChunkgo_mobile||[]).push([[535],{6353:function(e){"use strict";e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"Welcome","permalink":"/orda/blog/welcome"},{"title":"Hello","permalink":"/orda/blog/hello-world"},{"title":"Hola","permalink":"/orda/blog/hola"}]}')}}]);

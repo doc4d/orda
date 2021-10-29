@@ -1,0 +1,1 @@
+(self.webpackChunkorda=self.webpackChunkorda||[]).push([[83],{8194:function(a){"use strict";a.exports=JSON.parse('{"allTagsPath":"/orda/blog/tags","slug":"docusaurus","name":"docusaurus","count":3,"permalink":"/orda/blog/tags/docusaurus"}')}}]);
