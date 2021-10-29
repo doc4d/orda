@@ -10,7 +10,7 @@ import styles from "./styles.module.css";
 const features = [
   {
     title: "Database independant",
-    imageUrl: "img/webapp.png",
+    imageUrl: "img/independant.jpg",
     description: (
       <>
         <Translate>
@@ -21,7 +21,7 @@ const features = [
   },
   {
     title: "Object oriented",
-    imageUrl: "img/wysiwig.png",
+    imageUrl: "img/object.jpg",
     description: (
       <>
         Handle model and data through a fully object-oriented technology 
@@ -31,7 +31,7 @@ const features = [
   },
   {
     title: "Business API",
-    imageUrl: "img/orda.png",
+    imageUrl: "img/api.jpg",
     description: (
       <>
         Use the comprehensive ORDA API to edit, sort, or query data and develop your own business API layer.
