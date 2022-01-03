@@ -137,13 +137,14 @@ OB GET PROPERTY NAMES(ds.Employee;$prop)
 Dataclass properties are attribute objects describing the underlying fields or relations. For example:
 
 ```4d 
+ var $nameAttribute; $revenuesAttribute : Object
  $nameAttribute:=ds.Company.name //reference to class attribute
  $revenuesAttribute:=ds.Company["revenues"] //alternate way
 ```
 
-This code assigns to `$nameAttribute` and `$revenuesAttribute` references to the `name` and `revenues` attributes of the `Company` class. This syntax does NOT return values held inside of the attribute, but instead returns references to the attributes themselves. To handle values, you need to go through [Entities](#entity).
+This code assigns to `$nameAttribute` and `$revenuesAttribute` references to the `name` and `revenues` attributes of the `Company` class. This syntax does NOT return values held inside of the attribute, but instead returns objects describing the attributes themselves, that you can handle using the [`DataClassAttribute` class API](../API/DataClassAttribute.md). To handle values, you need to go through [Entities](#entity).
 
-All eligible fields in a table are available as attributes of their parent [dataclass](#dataclass). Remote datastores accessed through `Open datastore` or [REST requests](REST/gettingStarted.md) must expose as REST resource each field to be used as a dataclass attribute. 
+All eligible fields in a table are available as attributes of their [dataclass](#dataclass). Remote datastores accessed through `Open datastore` or [REST requests](REST/gettingStarted.md) must expose as REST resource each field to be used as a dataclass attribute. 
 
 
 #### Storage and Relation attributes  
@@ -196,13 +197,14 @@ Keep in mind that these objects describe attributes, but do not give access to d
 
 An entity is the equivalent of a record. It is actually an object that references a record in the database. It can be seen as an instance of a [dataclass](#dataclass), like a record of the table matching the dataclass. However, an entity also contains data correlated to the database related to the datastore. 
 
-The purpose of the entity is to manage data (create, update, delete). When an entity reference is obtained by means of an entity selection, it also retains information about the entity selection which allows iteration through the selection.
+The purpose of the entity is to manage data (create, read, update, delete). When an entity reference is obtained by means of an entity selection, it also retains information about the entity selection which allows iteration through the selection.
 
 For example, to create an entity:
 
 ```4d
  var $status : Object
  var $employee : cs.EmployeeEntity //declares a variable of the EmployeeEntity class type
+
 
  
 
@@ -256,18 +258,32 @@ The entity selection properties are however enumerable:
 
 #### Ordered or unordered entity selection
 
-For optimization reasons, by default ORDA usually creates unordered entity selections, except when you call the `orderBy( )` function or use specific options. In this documentation, unless specified, "entity selection" usually refers to an "unordered entity selection".
+For optimization reasons, by default ORDA usually creates unordered entity selections, except when you call the `orderBy()` function or use specific options. In this documentation, unless specified, "entity selection" usually refers to an "unordered entity selection".
 
 Ordered entity selections are created only when necessary or when specifically requested using options, i.e. in the following cases:
 
-*	result of an `orderBy()` on a selection (of any type) or an `orderBy()` on a dataclass
+*	result of an `orderBy()` on a selection (of any type)
+*	result of an `orderByFormula()` on a selection (of any type)
 *	result of the `newSelection()` function with the `dk keep ordered` option
 
-Unordered entity selections are created in the following cases:
+:::note
 
-*	result of a standard `query()` on a selection (of any type) or a `query()` on a dataclass,
-*	result of the `newSelection()` function without option,
-*	result of any of the comparison methods, whatever the input selection types: `or()`, `and()`, `minus()`.
+Ordered entity selections support duplicated entity references. On the other hand, when an ordered entity selection becomes an unordered entity selection, any repeated entity references are removed.
+
+:::
+
+
+Unordered entity selections are created in all other cases, including:
+
+*	result of a `query()` on a selection (of any type) or a `query()` on a dataclass,
+*	result of the `newSelection()` function without option, `all()`, or `fromCollection()` functions on a dataclass,
+*	result of any of the comparison methods, whatever the input selection types: `or()`, `and()`, `minus()`,
+*	result of various functions from the entity selection class: `add()`, `copy()`, `extract()`, `slice()`, `drop()`,
+*	result of a relation such as `$empSel:=company.employees`,
+*	result of a projection such as `$empSel.name`,
+*	result of an `entity.getSelection()` function.
+
+
 
 :::note
 
@@ -275,4 +291,3 @@ Entity selections built upon remote datastores are always ordered.
 
 :::
 
-Note that when an ordered entity selection becomes an unordered entity selection, any repeated entity references are removed.

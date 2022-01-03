@@ -6,11 +6,11 @@ title: DataClassAttribute
 Dataclass attributes are available as properties of their respective classes. For example:
 
 ```4d
- nameAttribute:=ds.Company.name //reference to class attribute
- revenuesAttribute:=ds.Company["revenues"] //alternate way
+ $nameAttribute:=ds.Company.name //reference to class attribute
+ $revenuesAttribute:=ds.Company["revenues"] //alternate way
 ```
 
-This code assigns to *nameAttribute* and *revenuesAttribute* references to the name and revenues attributes of the Company class. This syntax does NOT return values held inside of the attribute, but instead returns references to the attributes themselves. To handle values, you need to go through [**Entities**](EntityClass).
+This code assigns to `$nameAttribute` and `$revenuesAttribute` references to the `name` and `revenues` attributes of the Company class. This syntax does NOT return values held inside of the attribute, but instead returns references to the attributes themselves. To handle values, you need to go through [**Entities**](EntityClass).
 
 `DataClassAttribute` objects have properties that you can read to get information about your dataclass attributes.
 

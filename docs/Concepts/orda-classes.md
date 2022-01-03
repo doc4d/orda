@@ -16,7 +16,11 @@ $nextHigh:=ds.Employee(1).getNextWithHigherSalary()
 Developers can not only use these functions in local datastores, but also in remote architectures:
 
 ```4d
- //$cityManager is the reference of a remote datastore
+var $connectTo : Object
+var $cityManager : cs.DataStore
+$connectTo:=New object("type";"4D Server";"hostname";"192.168.18.11:8044")
+$cityManager:=Open datastore($connectTo;"CityManager")
+
 Form.comp.city:=$cityManager.City.getCityName(Form.comp.zipcode)
 ```
 
@@ -33,7 +37,7 @@ Thanks to this feature, the entire business logic of your 4D application can be 
 
 ## Architecture
 
-ORDA provides **generic classes** exposed through a **`4D`** class store, as well as **user classes** (extending generic classes) exposed in the **`cs`** class store:
+ORDA provides **generic classes** exposed through a **`4D`** class store, as well as **data model user classes** (extending generic classes) exposed in the **`cs`** class store:
 
 ![](img/ClassDiagramImage.png)
 
@@ -74,7 +78,7 @@ You can create functions in the DataStore class that will be available through t
 
 Class extends DataStoreImplementation
 
-Function getDesc
+exposed Function getDesc
   $0:="Database exposing employees and their companies"
 ```
 
@@ -141,7 +145,7 @@ The `City Class` provides an API:
 
 Class extends DataClass
 
-Function getCityName($zipcode : Integer) : Text
+exposed Function getCityName($zipcode : Integer) : Text
 	var $zip : cs.ZipCodeEntity
 
 	$zip:=ds.ZipCode.get($zipcode)
@@ -265,6 +269,8 @@ When creating or editing data model classes, you must pay attention to the follo
 
 - When defining a class, make sure the [`Class extends`] statement exactly matches the parent class name (remember that they're case sensitive). For example, `Class extends EntitySelection` for an entity selection class.
 
+- In an ORDA class, `This` designates the instance of the object matching the dataclass.
+
 - You cannot instantiate a data model class object with the `new()` keyword (an error is returned). You must use a regular method as listed in the [`Instantiated by` column of the ORDA class table](#architecture).
 
 - You cannot override a native ORDA class function from the **`4D`** [class store](Concepts/classes.md#class-stores) with a data model user class function.
@@ -359,10 +365,10 @@ Function get bigBoss($event : Object)-> $result: cs.EmployeeEntity
 
 ```4d
 Function get coWorkers($event : Object)-> $result: cs.EmployeeSelection
-    If (This.manager.manager=Null)
+    If (This.manager=Null)
         $result:=ds.Employee.newSelection()
     Else 
-        $result:=This.manager.directReports.minus(this)
+        $result:=This.manager.directReports.minus(This)
     End if
 ```
     
@@ -804,7 +810,7 @@ var $entity : cs.StudentsEntity
 $entity:=ds.Students.new()
 $entity.fromObject($student)
 $entity.school:=This.query("name=:1"; $student.schoolName).first()
-$entity.serialNumber:=This.computeSerialNumber()
+$entity.idNumber:=This.computeIDNumber()
 $status:=$entity.save()
 
 //Not exposed (private) function

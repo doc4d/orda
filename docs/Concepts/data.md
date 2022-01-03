@@ -11,7 +11,7 @@ In ORDA, you access data through [entities](data-model#entity) and [entity selec
 There are two ways to create a new entity in a dataclass:
 
 * You create an empty entity using the `dataclass.new()` function.
-* Since entities are references to database records, you can create entities by referencing them with ORDA functions such as `entity.next()` or `entityselection.first()`.
+* You create a new reference to a database record using ORDA functions such as `entity.next()` or `entityselection.first()`.
 
 Keep in mind that the entity is only created in memory. If you want to add it to the datastore, you must call the `entity.save()` function.
 
