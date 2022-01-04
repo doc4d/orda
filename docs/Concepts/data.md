@@ -188,6 +188,11 @@ You can create an object of type [entity selection](data-model#entity-selection)
 
 You can simultaneously create and use as many different entity selections as you want for a dataclass. Keep in mind that an entity selection only contains references to entities. Different entity selections can contain references to the same entities. 
 
+:::note
+
+An entity selection is usually unordered, but it can be ordered (see [Ordered or unordered entity selection](data-model#ordered-or-unordered-entity-selection)).
+
+:::
 
 ### Entity selections and Storage attributes  
 

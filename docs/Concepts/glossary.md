@@ -203,7 +203,7 @@ When the 4D application connects to a Remote datastore, a session is created on 
 
 Each time a new session is opened, a license is used. Each time a session is closed, the license is freed.
 
-Inactive sessions are automatically closed after a timeout. The default timeout is 48 hours, it can be set by the developer (it must be >= 60 minutes).  
+Inactive sessions are automatically closed after a timeout. The default timeout is 60 minutes, it can be set by the developer (it must be >= 60 minutes).  
 
 ## Shallow copy 
  
