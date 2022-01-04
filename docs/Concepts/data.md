@@ -178,12 +178,13 @@ You can assign or modify the value of a "one" related entity attribute from the 
 
 You can create an object of type [entity selection](data-model#entity-selection) as follows:
 
-*	Querying the entities ###[in a dataclass](API/DataClassClass.md#query) or in an ###[existing entity selection](API/EntitySelectionClass.md#query);
+*	Querying the entities [in a dataclass](API/DataClassClass.md#query) or in an [existing entity selection](API/EntitySelectionClass.md#query);
 *	Using the [`.all()`](API/DataClassClass.md#all) dataclass function to select all the entities in a dataclass;
 *	Using the [`.newSelection()`](API/DataClassClass.md#newselection) dataclass function to create a blank entity selection;
 *	Using the [`.copy()`](API/EntitySelectionClass.md#copy) function to duplicate an existing entity selection;
-*	Using one of the various functions from the [Entity selection class](API/EntitySelectionClass.md) that returns a new entity selection, such as [`.or()`](API/EntitySelectionClass.md#or);
-*	Using a relation attribute of kind `relatedEntities`.
+*	Using one of the various functions from the [Entity selection class](API/EntitySelectionClass.md) that returns a new entity selection, such as [`.and()`](API/EntitySelectionClass.md#and), [`.minus()`](API/EntitySelectionClass.md#minus), [`.slice()`](API/EntitySelectionClass.md#slice), etc.;
+*	Using the [`entity.getSelection()`](API/EntityClass.md#getselection) function;
+*	Using a relation attribute of kind `relatedEntities` such as `$empSel:=company.employees`, or a projection such as `$empSel.name`.
 
 You can simultaneously create and use as many different entity selections as you want for a dataclass. Keep in mind that an entity selection only contains references to entities. Different entity selections can contain references to the same entities. 
 
@@ -201,7 +202,7 @@ This code returns in *$localEmails* a collection of email addresses as strings.
 
 ### Entity selections and Relation attributes  
 
-In addition to the variety of ways you can query, you can also use relation attributes as properties of entity selections to return new entity selections. For example, consider the following structure: 
+In addition to the variety of ways you can query, you can also use rel                                ation attributes as properties of entity selections to return new entity selections. For example, consider the following structure: 
 
 ![](img/structure6.png)
 

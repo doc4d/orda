@@ -37,7 +37,7 @@ Thanks to this feature, the entire business logic of your 4D application can be 
 
 ## Architecture
 
-ORDA provides **generic classes** exposed through a **`4D`** class store, as well as **data model user classes** (extending generic classes) exposed in the **`cs`** class store:
+ORDA provides **generic classes** exposed through a **`4D`** class store, as well as specific **user classes** (extending generic classes) exposed in the **`cs`** class store:
 
 ![](img/ClassDiagramImage.png)
 

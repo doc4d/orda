@@ -276,11 +276,9 @@ Ordered entity selections support duplicated entity references. On the other han
 Unordered entity selections are created in all other cases, including:
 
 *	result of a `query()` on a selection (of any type) or a `query()` on a dataclass,
-*	result of the `newSelection()` function without option, `all()`, or `fromCollection()` functions on a dataclass,
-*	result of any of the comparison methods, whatever the input selection types: `or()`, `and()`, `minus()`,
-*	result of various functions from the entity selection class: `add()`, `copy()`, `extract()`, `slice()`, `drop()`,
-*	result of a relation such as `$empSel:=company.employees`,
-*	result of a projection such as `$empSel.name`,
+*	result of a `all()`, `fromCollection()`, or `newSelection()` (without option) function on a dataclass,
+*	result of various functions from the entity selection class, whatever the input selection types: `or()`, `and()`, `add()`, `copy()`, `extract()`, `slice()`, `drop()`...
+*	result of a relation such as `$empSel:=company.employees`, or a projection such as `$empSel.name`,
 *	result of an `entity.getSelection()` function.
 
 
