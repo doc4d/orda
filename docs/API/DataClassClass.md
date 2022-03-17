@@ -15,6 +15,7 @@ A [DataClass](../Concepts/data-model#dataclass) provides an object interface to 
 |[<!-- INCLUDE #DataClassClass.all().Syntax -->](#all)<p>&nbsp;&nbsp;&nbsp;&nbsp;<!-- INCLUDE #DataClassClass.all().Summary --></p>|
 |[<!-- INCLUDE #DataClassClass.fromCollection().Syntax -->](#fromcollection)<p>&nbsp;&nbsp;&nbsp;&nbsp;<!-- INCLUDE #DataClassClass.fromCollection().Summary --></p> |
 |[<!-- INCLUDE #DataClassClass.get().Syntax -->](#get)<p>&nbsp;&nbsp;&nbsp;&nbsp;<!-- INCLUDE #DataClassClass.get().Summary --></p> |
+|[<!-- INCLUDE #DataClassClass.getCount().Syntax -->](#getcount)<p>&nbsp;&nbsp;&nbsp;&nbsp;<!-- INCLUDE #DataClassClass.getCount().Summary --> |
 |[<!-- INCLUDE #DataClassClass.getDataStore().Syntax -->](#getdatastore)<p>&nbsp;&nbsp;&nbsp;&nbsp;<!-- INCLUDE #DataClassClass.getDataStore().Summary --></p> |
 |[<!-- INCLUDE #DataClassClass.getInfo().Syntax -->](#getinfo)<p>&nbsp;&nbsp;&nbsp;&nbsp;<!-- INCLUDE #DataClassClass.getInfo().Summary --></p> |
 |[<!-- INCLUDE #DataClassClass.new().Syntax -->](#new)<p>&nbsp;&nbsp;&nbsp;&nbsp;<!-- INCLUDE #DataClassClass.new().Summary --></p> |
@@ -329,6 +330,44 @@ This example illustrates the use of the *context* property:
  completeSummary($e4) //In completeSummary method, the optimization associated to context "summary" is applied
 ``` 
  
+
+<!-- END REF -->
+
+
+<!-- REF DataClassClass.getCount.Desc -->
+## .getCount()
+
+<details><summary>History</summary>
+|Version|Changes|
+|---|---|
+|v19 R5|Added|
+</details>
+
+<!-- REF #DataClassClass.getCount().Syntax -->
+**.getCount()** : Integer <!-- END REF -->
+
+<!-- REF #DataClassClass.getCount().Params -->
+|Parameter|Type||Description|
+|---|---|---|---|
+|result|Integer|<-|Number of entities in the dataclass|
+<!-- END REF -->
+
+#### Description
+
+The `.getCount()` function <!-- REF #DataClassClass.getCount().Summary --> returns the number of entities in a dataclass<!-- END REF -->.
+
+If this function is used within a transaction, entities created during the transaction will be taken into account.
+
+#### Example 
+
+```4d
+var $ds : 4D.DataStoreImplementation
+var $number : Integer
+
+$ds:=Open datastore(New object("hostname"; "www.myserver.com"); "myDS")
+
+$number:=$ds.Persons.getCount() 
+```
 
 <!-- END REF -->
 
@@ -741,6 +780,37 @@ ds.People.query("places.locations[a].kind= :1 and places.locations[a].city= :2";
 
 ... the query will only return "martin" because it has a "locations" element whose "kind" is "home" and whose "city" is "paris". The query will not return "smith" because the values "home" and "paris" are not in the same collection element. 
 
+
+
+**Queries in many-to-many relations**  
+
+ORDA offers a special syntax to facilitate queries in many-to-many relations. In this context, you may need to search for different values with an `AND` operator BUT in the same attribute. For example, take a look at the following structure:
+
+![](img/manytomany.png)
+
+Imagine that you want to search all movies in which *both* actor A and actor B have a role. If you write a simple query using an `AND` operator, it will not work:
+
+```4d
+// invalid code
+$es:=ds.Movie.query("roles.actor.lastName = :1 AND roles.actor.lastName = :2";"Hanks";"Ryan")  
+// $es is empty
+```
+Basically, the issue is related to the internal logic of the query: you cannot search for an attribute whose value would be both "A" and "B". 
+
+To make it possible to perform such queries, ORDA allows a special syntax: you just need to add a *class index* between **{}** in all additional relation attributes used in the string:
+
+```4d
+"relationAttribute.attribute = :1 AND relationAttribute{x}.attribute = :2 [AND relationAttribute{y}.attribute...]"
+```
+**{x}** tells ORDA to create another reference for the relation attribute. It will then perform all the necessary bitmap operations internally. Note that **x** can be any number **except 0**: {1}, or {2}, or {1540}... ORDA only needs a unique reference in the query for each class index.
+
+In our example, it would be:
+
+```4d
+// valid code
+$es:=ds.Movie.query("roles.actor.lastName = :1 AND roles.actor{2}.lastName = :2";"Hanks";"Ryan")  
+// $es contains movies (You've Got Mail, Sleepless in Seattle, Joe Versus the Volcano)
+```
 
 
 **formula parameter** 
