@@ -3,7 +3,8 @@ module.exports = {
   title: "ORDA - Object Relational Data Access",
   tagline: "A powerful technology for business-oriented data access",
   url: "https://doc4d.github.io",
-  baseUrl: "/orda/",
+  //baseUrl: "/orda/",
+  baseUrl: "/",
   onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
@@ -132,6 +133,7 @@ module.exports = {
       "@docusaurus/preset-classic",
       {
         docs: {
+		  path: "docs",
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
           editUrl:
