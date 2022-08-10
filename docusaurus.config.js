@@ -2,7 +2,7 @@
 module.exports = {
   title: "ORDA - Object Relational Data Access",
   tagline: "A powerful technology for business-oriented data access",
-  url: "https://doc4d.github.io",
+  url: "https://doc4d.github.io/orda",
   //baseUrl: "/orda/",
   baseUrl: "/",
   onBrokenLinks: "warn",
