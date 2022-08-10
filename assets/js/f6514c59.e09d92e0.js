@@ -1,1 +1,0 @@
-(self.webpackChunkorda=self.webpackChunkorda||[]).push([[622],{7158:function(a){"use strict";a.exports=JSON.parse('{"allTagsPath":"/orda/blog/tags","slug":"hola","name":"hola","count":1,"permalink":"/orda/blog/tags/hola"}')}}]);
